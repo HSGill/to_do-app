@@ -1,12 +1,16 @@
 import React from 'react';
 import './TaskList.css';
-const TaskList =({task}) => {
+import FlipMove from 'react-flip-move';
+
+const TaskList =({task1}) => {
     return (
-        <div class="">
-        <ul class="">
-          <li class="">{task}</li>
+      
+        <div  className="zone blue">
+        <ul >
+          <li >{task1}</li>
         </ul>
       </div>
+
       
       )
     }

@@ -1,25 +1,18 @@
 
 .container {
-   display : grid;
-   
+   display : flex;
+   justify-content: center;
    grid-gap: 10px;
 }
 .zone {
     cursor:pointer;
     text-align: center;
-    font-size:2em;
-    border-radius:4px;
+    font-size:1.2em;
+    border-radius:2px;
     border:1px solid #bbb;
-    transition: all 0.3s linear;
+    transition: all 0.2s linear;
 }
-.green {
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
-.red {
-    grid-column: 3/5;
-    scroll-behavior: auto;
-}
+
 .blue{
     grid-row-start: 2;
     grid-row-end: 5;
