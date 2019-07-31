@@ -4,6 +4,7 @@ import './App.css';
 import Signin from './Signin.js';
 import Particles from 'react-particles-js';
 import Navigation from './Navigation.js'
+import { stat } from 'fs';
 const particlesOptions = {
   particles: {
     number: {
@@ -23,7 +24,8 @@ class App extends Component {
     this.state = {
       inputField: '',
       taskList: [],
-      route: 'signin'
+      route: 'signin',
+      isSignedIn :false
     }
   }
   
@@ -35,6 +37,7 @@ class App extends Component {
   }
   onSubmit = (e) => {
     //console.log("Working");
+
  e.preventDefault();
     //console.log(this.state.inputField);
     if(this.state.inputField===""){
@@ -44,18 +47,33 @@ class App extends Component {
     this.setState(state => {
       state.taskList.push(this.state.inputField);
     })
+
   }
     this.setState({inputField:''});
 
-   console.log(this.state.taskList);
+
   }
   onRouteChange =(route) =>{
-    this.setState({route:route})
+    if(route==='signout'){
+      this.setState({isSignedIn:false})
+    }
+    else if(route==='home'){
+      this.setState({isSignedIn:true})
+
+    }
+    this.setState({ route: route })
+
   }
+ /*  onDelete = (event) => {
+    
+    this.setState({})
+    })
+  } */
+
   render() {
     return (
       <div className="">
-             <Navigation onRouteChange={this.onRouteChange} />
+             <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange} />
 
       {this.state.route==='signin'?
              <Signin onRouteChange = {this.onRouteChange} />:

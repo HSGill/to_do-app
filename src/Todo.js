@@ -8,10 +8,9 @@ const todo =  ({searchChange, onSubmit, taskList}) =>{
                    <input
                 className="pa3 ba b--green bg-lightest-blue"
                 type="search" placeholder="Add Task Here"
-
                 onChange={searchChange}
-            />
-            
+            />   
+             
             <button id="addTask" onClick={onSubmit}>Add Task</button>
             <Task taskList={taskList}/>
         </div>

@@ -4,6 +4,20 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+
+var knex = require('knex')({
+    client: 'pg',
+    connection: {
+      host : '127.0.0.1',
+      user : 'postgres',
+      password : 'littlebird',
+      database : 'todo'
+    }
+  });
+
+  knex.select('*').from ('login').then(data => {
+      console.log(data);
+  })
 app.use(bodyParser.json());
 const database = {
     users:[
@@ -30,13 +44,22 @@ app.get('/profile', (req,res)=>{
 })
 app.post('/signin', (req,res) =>{
 
-    if(req.body.email===database.users[0].email && req.body.password===database.users[0].password){
-        res.json("Success");
-    }else{
-        res.status(400).json('error Logginin');
-    }
-    
+    knex.select('email', 'password').from('login')
+    .where('email','=', req.body.email )
+    .then(user => {
+        res.json(user[0]);
+        
+    }) 
 })
 
-app.listen(3001);
+app.post('/register', (req,res)=> {
+    const{email,password} = req.body;
+  knex('login').insert({
+      email:email,
+      password:password
+  }).then(console.log)
+
+})
+
+app.listen(3000);
 
